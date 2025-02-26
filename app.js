@@ -6,6 +6,9 @@ const contactsRouter = require("./app/routes/contact.route");
 app.use(cors());
 app.use(express.json());
 app.use("/api/contacts", contactsRouter);
+app.get("/", (req, res) => {
+    res.json({ message: "Welcome to contact book application." });
+});
 app.use((req, res, next) => {
     // Code ở đây sẽ chạy khi không có route nào phù hợp với yêu cầu
     // Gọi next() để chuyển xử lý lỗi với middleware xử lý lỗi tiếp theo
@@ -18,9 +21,7 @@ app.use((err, req, res, next) => {
         message: err.message || "Internal Server Error",
     });
 });
-app.get("/", (req, res) => {
-    res.json({ message: "Welcome to contact book application." });
-});
+
 
 
 module.exports = app;
